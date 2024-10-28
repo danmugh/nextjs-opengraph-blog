@@ -1,3 +1,4 @@
+import { Thumbnail } from "@/lib/Ressources";
 import "./globals.css";
 
 import type { Metadata } from "next";
@@ -22,7 +23,23 @@ export async function generateMetadata(): Promise<Metadata> {
     metadataBase: new URL(baseUrl),
     title,
     description,
-    themeColor: "black"
+    themeColor: "black",
+    openGraph: {
+      title,
+      description,
+      url: baseUrl,
+      images: [
+        {
+          url: Thumbnail,
+          secureUrl: Thumbnail,
+          width: 1200,
+          height: 630,
+          alt: "Preview image for Dan Mugh's Blog",
+        },
+      ],
+      type: "website",
+      siteName: "Dan Mugh's Blog",
+    },
   };
 }
 
