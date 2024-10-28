@@ -1,0 +1,1 @@
+export const Thumbnail = '/thumbnail.png'; // Assuming the image name is thumbnail
