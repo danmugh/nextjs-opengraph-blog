@@ -1,8 +1,9 @@
-import { Thumbnail } from "@/lib/Ressources";
 import "./globals.css";
 
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
+
+import { Thumbnail } from "@/lib/Resources";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -30,7 +31,8 @@ export async function generateMetadata(): Promise<Metadata> {
       url: baseUrl,
       images: [
         {
-          url: `/api/og`,
+          url: Thumbnail,
+          secureUrl: Thumbnail,
           width: 1200,
           height: 630,
           alt: "Preview image for Dan Mugh's Blog",
