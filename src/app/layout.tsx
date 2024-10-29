@@ -1,4 +1,3 @@
-import { Thumbnail } from "@/lib/Ressources";
 import "./globals.css";
 
 import type { Metadata } from "next";
