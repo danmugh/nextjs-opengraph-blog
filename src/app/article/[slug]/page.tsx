@@ -1,10 +1,11 @@
 import React from "react";
 import Image from "next/image";
 import MarkdownIt from "markdown-it";
+import { Metadata } from "next/types";
 
-import { serverServices } from "@/lib/services/serverOnly";
 import { notFound } from "next/navigation";
 import { IArticleModel } from "@/lib/models";
+import { serverServices } from "@/lib/services/serverOnly";
 
 type Props = {
   params: { slug: string };
