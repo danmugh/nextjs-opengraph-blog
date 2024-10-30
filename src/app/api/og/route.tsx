@@ -1,4 +1,7 @@
 import { ImageResponse } from "next/og";
+import { NextRequest } from "next/server";
+
+import { IArticleModel } from "@/lib/models";
 
 // Route segment config
 export const runtime = "edge";
@@ -6,8 +9,14 @@ export const runtime = "edge";
 export const contentType = "image/png";
 
 // Image generation
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
+    const article: IArticleModel = await fetch(
+      `https://dev.to/api/articles/danmugh/${req.nextUrl.searchParams.get(
+        "title"
+      )}`
+    ).then((res) => res.json());
+
     // Font
     const rubik = await fetch(
       new URL("../../../../public/fonts/rubik.ttf", import.meta.url)
@@ -23,9 +32,31 @@ export async function GET() {
           }}
           tw="w-full h-full p-8 flex items-center justify-center relative"
         >
-          <div tw="flex flex-col">
-            <h1 tw="text-white text-5xl font-bold leading-[4px]">Learn more today!</h1>
-            <h1 tw="text-white/70 text-3xl font-bold leading-[8px]">Dive into the future of tech...</h1>
+          <div tw="w-full flex flex-col">
+            <h1 tw="text-[36px] text-white font-bold">{article.title}</h1>
+            <div tw="h-[50px] mt-3 flex justify-between items-center">
+              <div tw="flex justify-center items-center">
+                <img
+                  src={article.user.profile_image}
+                  width={100}
+                  height={100}
+                  alt={article.title}
+                  tw="w-[60px] h-[60px] rounded-[10px] mr-2"
+                  style={{ objectFit: "cover" }}
+                />
+                <div tw="flex flex-col">
+                  <p tw="text-[20px] text-white font-semibold leading-[1px]">
+                    {article.user.name}
+                  </p>
+                  <p tw="text-[20px] text-white/60 font-semibold leading-[1px]">
+                    Author
+                  </p>
+                </div>
+              </div>
+              <p tw="text-[20px] text-white font-semibold">
+                {article.reading_time_minutes} Min read
+              </p>
+            </div>
           </div>
         </div>
       ),

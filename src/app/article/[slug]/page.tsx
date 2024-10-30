@@ -11,18 +11,42 @@ type Props = {
   params: { slug: string };
 };
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({
+  params: { slug },
+}: Props): Promise<Metadata> {
   const baseUrl = "https://www.danmugh.com/";
 
-  const title = "Article title";
-  const description = "Article description";
+  const article = (await serverServices.getArticle(
+    slug
+  )) as IArticleModel;
+
+  const title = article.title;
+  const description = article.description;
+  const articleSlug = article.slug;
 
   return {
     title,
     description,
-    metadataBase: new URL(baseUrl)
+    metadataBase: new URL(baseUrl),
+    openGraph: {
+      title,
+      description,
+      images: [
+        {
+          url: `/api/og?title=${articleSlug}`,
+          width: 1200,
+          height: 630,
+          alt: `Preview image for ${title}`,
+        },
+      ],
+      type: "article",
+      url: `/blog/${slug}`,
+    },
+    alternates: {
+      canonical: `/blog/${slug}`,
+    },
   };
-};
+}
 
 const BlogPage = async ({ params: { slug } }: Props) => {
   const article = (await serverServices.getArticle(slug)) as IArticleModel;
