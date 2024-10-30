@@ -28,12 +28,12 @@ export const ArticleCard = ({ cardData }: Props) => {
             blurDataURL={cardData?.cover}
             unoptimized
           />
-          <div className="mt-4 text-xl sm:text-2xl text-white text-start font-bold leading-normal line-clamp-3">
+          <h3 className="mt-4 text-xl sm:text-2xl text-white text-start font-bold leading-normal line-clamp-3">
             {cardData.title}
-          </div>
-          <div className="mt-3 text-[15px] text-white/50 text-start font-normal leading-normal line-clamp-4">
+          </h3>
+          <p className="mt-3 text-[15px] text-white/50 text-start font-normal leading-normal line-clamp-4">
             {cardData.summary}
-          </div>
+          </p>
         </div>
       </div>
     </a>
