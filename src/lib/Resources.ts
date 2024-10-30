@@ -1,1 +1,3 @@
-export const Thumbnail = '/thumbnail.png'; // Assuming the image name is thumbnail
+export const Thumbnail = '/thumbnail.png';
+
+export const OGBackground = '/OGBackground.png';

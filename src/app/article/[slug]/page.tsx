@@ -59,7 +59,7 @@ const BlogPage = async ({ params: { slug } }: Props) => {
     html: true,
   });
 
-  md.renderer.rules.image = function (tokens, idx, _options, _env, _self) {
+  md.renderer.rules.image = function (tokens, idx) {
     const token = tokens[idx];
     const imgSrc = token.attrGet("src");
     const imgAlt = token.content || "";
